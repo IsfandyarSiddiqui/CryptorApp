@@ -1,0 +1,14 @@
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\bin\Debug\net10.0\Cryptor.exe
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\bin\Debug\net10.0\Cryptor.deps.json
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\bin\Debug\net10.0\Cryptor.runtimeconfig.json
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\bin\Debug\net10.0\Cryptor.dll
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\bin\Debug\net10.0\Cryptor.pdb
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.AssemblyInfoInputs.cache
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.AssemblyInfo.cs
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.csproj.CoreCompileInputs.cache
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.dll
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\refint\Cryptor.dll
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.pdb
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\Cryptor.genruntimeconfig.cache
+C:\Users\isfandyar.aslam\source\repos\CryptorApp\Cryptor\obj\Debug\net10.0\ref\Cryptor.dll
