@@ -291,3 +291,31 @@ Basic manual round trip:
 dotnet run --project .\Cryptor\Cryptor.csproj -- encrypt --text "hello"
 dotnet run --project .\Cryptor\Cryptor.csproj -- decrypt --text "CRYPTORv1:..." --output console
 ```
+
+## Native AOT Publishing
+
+The project is set up to be Native AOT-compatible:
+
+- `IsAotCompatible` is enabled in `Cryptor.csproj`.
+- JSON payload serialization uses a source-generated `JsonSerializerContext`.
+- A Windows x64 AOT publish profile is included at `Cryptor/Properties/PublishProfiles/win-x64-aot.pubxml`.
+
+Publish a Windows x64 Native AOT executable:
+
+```powershell
+dotnet publish .\Cryptor\Cryptor.csproj -p:PublishProfile=win-x64-aot
+```
+
+The output is written to:
+
+```text
+Cryptor\bin\Release\net10.0\publish\win-x64-aot\
+```
+
+You can also publish directly without the profile:
+
+```powershell
+dotnet publish .\Cryptor\Cryptor.csproj -c Release -r win-x64 --self-contained true -p:PublishAot=true
+```
+
+Native AOT is useful if you want to distribute a standalone native executable with faster startup and no installed .NET runtime requirement. The tradeoff is that you must publish separately for each target OS and architecture, such as `win-x64`, `linux-x64`, or `osx-arm64`.

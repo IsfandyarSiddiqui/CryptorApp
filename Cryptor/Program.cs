@@ -20,12 +20,6 @@ internal static class Program
     private const int TagSizeBytes = 16;
     private const int DefaultIterations = 600_000;
 
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-    };
-
     public static int Main(string[] args)
     {
         try
@@ -496,17 +490,6 @@ internal static class Program
     private sealed class InvalidPayloadException(string message) : Exception(message);
     private sealed class ClipboardException(string message) : Exception(message);
 
-    private sealed record EncryptedPackage(
-        string Version,
-        string Algorithm,
-        string Kdf,
-        string KdfHash,
-        int Iterations,
-        string Salt,
-        string Nonce,
-        string Tag,
-        string Ciphertext);
-
     private static class CryptoService
     {
         public static EncryptedPackage Encrypt(string plaintext, char[] password)
@@ -643,8 +626,7 @@ internal static class Program
     {
         public static string Encode(EncryptedPackage package)
         {
-            string json = JsonSerializer.Serialize(package, JsonOptions);
-            byte[] bytes = Encoding.UTF8.GetBytes(json);
+            byte[] bytes = JsonSerializer.SerializeToUtf8Bytes(package, CryptorJsonContext.Default.EncryptedPackage);
             return PayloadPrefix + Base64UrlEncode(bytes);
         }
 
@@ -666,7 +648,7 @@ internal static class Program
             try
             {
                 byte[] jsonBytes = Base64UrlDecode(encoded);
-                EncryptedPackage? package = JsonSerializer.Deserialize<EncryptedPackage>(jsonBytes, JsonOptions);
+                EncryptedPackage? package = JsonSerializer.Deserialize(jsonBytes, CryptorJsonContext.Default.EncryptedPackage);
 
                 return package ?? throw new InvalidPayloadException("Invalid encrypted payload: empty payload.");
             }
@@ -809,3 +791,21 @@ internal static class Program
         }
     }
 }
+
+internal sealed record EncryptedPackage(
+    string Version,
+    string Algorithm,
+    string Kdf,
+    string KdfHash,
+    int Iterations,
+    string Salt,
+    string Nonce,
+    string Tag,
+    string Ciphertext);
+
+[JsonSourceGenerationOptions(
+    GenerationMode = JsonSourceGenerationMode.Metadata,
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)]
+[JsonSerializable(typeof(EncryptedPackage))]
+internal sealed partial class CryptorJsonContext : JsonSerializerContext;
